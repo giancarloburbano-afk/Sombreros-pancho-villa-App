@@ -44,9 +44,22 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+//para poder crear las variables de tipo sombrero
+data class Sombrero(
+    val name: String,
+    val precio: Double,
+    val imagen: Int,
+    val descripcion: String
+)
 
 @Composable
 fun PanchoVillaApp() {
+    // lista de datos
+    val listaSombreros = listOf(
+        Sombrero("Sombrero Aguadeño", 99000.0, R.drawable.aguadeno, "Realizado 100% a mano"),
+        Sombrero("Sombrero Costeño", 35000.0, R.drawable.costeno, "Un estilo fresco y diferente")
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -85,23 +98,15 @@ fun PanchoVillaApp() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // AQUI completamos los parámetros para el primer sombrero
-        ProductCard(
-            name = "Sombrero Aguadeño",
-            precio = 99000.0,
-            imagen = R.drawable.aguadeno,
-            descripcion = "Realizado 100% a mano"
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // AQUI completamos los parámetros para el segundo sombrero
-        ProductCard(
-            name = "Sombrero Costeño",
-            precio = 35000.0,
-            imagen = R.drawable.costeno,
-            descripcion = "Un estilo fresco y diferente"
-        )
+        for (sombrero in listaSombreros) {
+            ProductCard(
+                name = sombrero.name,
+                precio = sombrero.precio,
+                imagen = sombrero.imagen,
+                descripcion = sombrero.descripcion
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+        }
     }
 }
 
